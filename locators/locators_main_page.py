@@ -8,5 +8,13 @@ class MainPageLocators:
     PRODUCT_CARD = (By.XPATH, "//*[@class='product-thumb']")
     TOP_NAVIGATION_ITEMS = (By.XPATH, "//li[contains(@class, 'nav-item')]")
 
+
 class CatalogPageLocators:
-    CATEGORIES = (By.XPATH, "//a[@class='list-group-item']")
+    CATEGORIES = (By.XPATH, "//a[contains(@class, 'list-group-item')]")
+    SORT = (By.XPATH, "//label[@for='input-sort']")
+    SORT_SELECT = (By.XPATH, "//*[@id='input-sort']")
+    LIMIT = (By.XPATH, "//label[@for='input-limit']")
+    LIMIT_SELECT = (By.XPATH, "//*[@id='input-limit']/option")
+
+
+
