@@ -1,31 +1,45 @@
+import os.path
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
+
 import pytest
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", default="chrome", choices=("chrome", "firefox"))
+    parser.addoption("--browser", default="chrome", choices=("chrome", "firefox", "safari"))
     parser.addoption("--headless", action='store_true')
+    parser.addoption("--base_url", default="http://192.168.15.101:8081/en-gb/")
+    parser.addoption("--drivers_folder", default="drivers")
 
 
 @pytest.fixture
-def set_browser(request):
+def browser(request):
     browser_name = request.config.getoption("--browser")
     headless_mode = request.config.getoption("--headless")
-    browser = None
+    drivers_folder = request.config.getoption("--drivers_folder")
+    driver = None
     if browser_name == 'chrome':
         options = webdriver.ChromeOptions()
         if headless_mode:
             options.add_argument('--headless=new')
-        browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+        service = ChromeService(executable_path=os.path.join(f"{drivers_folder}", "chromedriver"))
+        driver = webdriver.Chrome(service=service, options=options)
     if browser_name == 'firefox':
         options = webdriver.FirefoxOptions()
-        options.headless = headless_mode
-        browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
+        if headless_mode:
+            options.add_argument('--headless')
+        service = FirefoxService(executable_path=os.path.join(f"{drivers_folder}", "geckodriver"))
+        driver = webdriver.Firefox(service=service, options=options)
+    if browser_name == 'safari':
+        driver = webdriver.Safari()
 
-    browser.maximize_window()
-    yield browser
-    browser.quit()
+    driver.maximize_window()
+    yield driver
+    driver.quit()
+
+
+@pytest.fixture
+def base_url(request):
+    return request.config.getoption("--base_url")

@@ -1,10 +1,9 @@
 from locators.locators_main_page import MainPageLocators, CatalogPageLocators, ProductPageLocators
-from src.helper import BASE_URL, CATALOG_URL, CategoryData, SINGLE_CARD_URL
+from src.helper import CategoryData
 
 
-def t1est_check_main_page_elements(set_browser):
-    browser = set_browser
-    browser.get(BASE_URL)
+def test_check_main_page_elements(browser, base_url):
+    browser.get(base_url)
 
     currency = browser.find_element(*MainPageLocators.CURRENCY)
     search_btn = browser.find_element(*MainPageLocators.SEARCH_BUTTON)
@@ -19,9 +18,8 @@ def t1est_check_main_page_elements(set_browser):
     assert len(top_navigation_items) == 8
 
 
-def tes1t_check_catalog_elements(set_browser):
-    browser = set_browser
-    browser.get(CATALOG_URL)
+def test_check_catalog_elements(browser, base_url):
+    browser.get(base_url + "catalog/tablet")
     categories = browser.find_elements(*CatalogPageLocators.CATEGORIES)
 
     sort = browser.find_element(*CatalogPageLocators.SORT)
@@ -37,9 +35,8 @@ def tes1t_check_catalog_elements(set_browser):
         assert int(limit.text) in [10, 25, 50, 75, 100]
 
 
-def test_check_product_card(set_browser):
-    browser = set_browser
-    browser.get(SINGLE_CARD_URL)
+def test_check_product_card(browser, base_url):
+    browser.get(base_url + "product/laptop-notebook/hp-lp3065")
 
     product_price = browser.find_element(*ProductPageLocators.PRICE)
     add_wl = browser.find_element(*ProductPageLocators.ADD_WISH_LIST)
