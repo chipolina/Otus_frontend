@@ -1,4 +1,4 @@
-from locators.locators_main_page import MainPageLocators, CatalogPageLocators
+from locators.locators_main_page import MainPageLocators, CatalogPageLocators, ProductPageLocators
 from src.helper import BASE_URL, CATALOG_URL, CategoryData, SINGLE_CARD_URL
 
 
@@ -19,7 +19,7 @@ def t1est_check_main_page_elements(set_browser):
     assert len(top_navigation_items) == 8
 
 
-def test_check_catalog_elements(set_browser):
+def tes1t_check_catalog_elements(set_browser):
     browser = set_browser
     browser.get(CATALOG_URL)
     categories = browser.find_elements(*CatalogPageLocators.CATEGORIES)
@@ -37,6 +37,21 @@ def test_check_catalog_elements(set_browser):
         assert int(limit.text) in [10, 25, 50, 75, 100]
 
 
-def test_check_single_card(set_browser):
+def test_check_product_card(set_browser):
     browser = set_browser
     browser.get(SINGLE_CARD_URL)
+
+    product_price = browser.find_element(*ProductPageLocators.PRICE)
+    add_wl = browser.find_element(*ProductPageLocators.ADD_WISH_LIST)
+    add_to_cart = browser.find_element(*ProductPageLocators.ADD_TO_CART)
+    quantity = browser.find_element(*ProductPageLocators.QUANTITY)
+    delivery_date = browser.find_element(*ProductPageLocators.DELIVERY_DATE)
+    delivery_date.click()
+    calendar = browser.find_element(*ProductPageLocators.CALENDAR)
+
+    assert product_price.is_displayed()
+    assert add_wl.is_enabled()
+    assert add_to_cart.is_enabled()
+    assert quantity.get_property('value') == '1'
+    assert delivery_date.get_property('value') == "2011-04-22"
+    assert calendar.is_displayed()

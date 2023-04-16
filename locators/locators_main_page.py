@@ -17,4 +17,10 @@ class CatalogPageLocators:
     LIMIT_SELECT = (By.XPATH, "//*[@id='input-limit']/option")
 
 
-
+class ProductPageLocators:
+    PRICE = (By.XPATH, "//span[@class='price-new']")
+    ADD_WISH_LIST = (By.XPATH, "//button[@title='Add to Wish List']")
+    ADD_TO_CART = (By.XPATH, "//button[@id='button-cart']")
+    QUANTITY = (By.XPATH, "//input[@id='input-quantity']")
+    DELIVERY_DATE = (By.XPATH, "//input[@id='input-option-225']")
+    CALENDAR = (By.XPATH, "//*[contains(@class, 'daterangepicker')]")
