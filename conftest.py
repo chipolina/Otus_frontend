@@ -7,7 +7,7 @@ import pytest
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", default="chrome")
+    parser.addoption("--browser", default="chrome", choices=("chrome", "firefox"))
     parser.addoption("--headless", action='store_true')
 
 
