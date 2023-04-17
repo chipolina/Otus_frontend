@@ -24,3 +24,11 @@ class ProductPageLocators:
     QUANTITY = (By.XPATH, "//input[@id='input-quantity']")
     DELIVERY_DATE = (By.XPATH, "//input[@id='input-option-225']")
     CALENDAR = (By.XPATH, "//*[contains(@class, 'daterangepicker')]")
+
+
+class RegisterPageLocators:
+    FIRST_NAME = (By.XPATH, "//input[@id='input-firstname']")
+    POLICY = (By.XPATH, "//input[@name='agree']")
+    PAGE_MAIN_TITLE = (By.XPATH, "//*[@id='content']/h1")
+    REQUIRED_FIELDS = (By.XPATH, "//div[contains(@class,'required')]")
+    MENU_SECTIONS = (By.XPATH, "//a[@class='list-group-item']")

@@ -10,7 +10,7 @@ import pytest
 def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome", choices=("chrome", "firefox", "safari"))
     parser.addoption("--headless", action='store_true')
-    parser.addoption("--base_url", default="http://192.168.15.101:8081/en-gb/")
+    parser.addoption("--base_url", default="http://192.168.15.100:8081/en-gb/")
     parser.addoption("--drivers_folder", default="drivers")
 
 

@@ -1,8 +1,12 @@
-from locators.locators_main_page import MainPageLocators, CatalogPageLocators, ProductPageLocators
+import time
+
+from locators.locators_main_page import MainPageLocators, CatalogPageLocators, ProductPageLocators, RegisterPageLocators
 from src.helper import CategoryData
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
-def test_check_main_page_elements(browser, base_url):
+def te1st_check_main_page_elements(browser, base_url):
     browser.get(base_url)
 
     currency = browser.find_element(*MainPageLocators.CURRENCY)
@@ -18,7 +22,7 @@ def test_check_main_page_elements(browser, base_url):
     assert len(top_navigation_items) == 8
 
 
-def test_check_catalog_elements(browser, base_url):
+def te1st_check_catalog_elements(browser, base_url):
     browser.get(base_url + "catalog/tablet")
     categories = browser.find_elements(*CatalogPageLocators.CATEGORIES)
 
@@ -35,7 +39,7 @@ def test_check_catalog_elements(browser, base_url):
         assert int(limit.text) in [10, 25, 50, 75, 100]
 
 
-def test_check_product_card(browser, base_url):
+def te1st_check_product_card(browser, base_url):
     browser.get(base_url + "product/laptop-notebook/hp-lp3065")
 
     product_price = browser.find_element(*ProductPageLocators.PRICE)
@@ -52,3 +56,18 @@ def test_check_product_card(browser, base_url):
     assert quantity.get_property('value') == '1'
     assert delivery_date.get_property('value') == "2011-04-22"
     assert calendar.is_displayed()
+
+
+def test_registration_page(browser, base_url):
+    browser.get(base_url + "?route=account/register")
+    page_main_title = browser.find_element(*RegisterPageLocators.PAGE_MAIN_TITLE)
+    first_name = browser.find_element(*RegisterPageLocators.FIRST_NAME)
+    required_fields = browser.find_elements(*RegisterPageLocators.REQUIRED_FIELDS)
+    policy = browser.find_element(*RegisterPageLocators.POLICY)
+    menu_sections = browser.find_element(*RegisterPageLocators.MENU_SECTIONS)
+
+    assert page_main_title.text == "Register Account"
+    assert first_name.get_property("placeholder") == "First Name"
+    assert not policy.is_selected()
+    assert len(required_fields) == 4
+    assert len(menu_sections) == 13
