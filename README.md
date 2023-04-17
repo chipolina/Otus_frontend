@@ -1,1 +1,1 @@
-# octopus_frontend
+# otus_frontend
