@@ -14,14 +14,8 @@ class CatalogPage(BasePage):
     def find_categories(self):
         return self.elements(self.CATEGORIES)
 
-    def find_sort(self):
-        return self.element(self.CATEGORIES)
-
-    def find_limit(self):
-        return self.element(self.CATEGORIES)
-
     def find_limit_select(self):
-        return self.elements(self.CATEGORIES)
+        return self.elements(self.LIMIT_SELECT)
 
     def check_categories_names(self, categories):
         for category in categories:

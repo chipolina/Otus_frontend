@@ -26,7 +26,7 @@ class BasePage:
         self.element(locator).is_enabled()
 
     def check_element_text(self, locator, text):
-        self.element(locator).text(text)
+        assert self.element(locator).text == text
 
     def check_element_property(self, locator, prop, value):
         assert self.element(locator).get_property(prop) == value
