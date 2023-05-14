@@ -1,15 +1,18 @@
-from locators.locators_main_page import MainPageLocators, CatalogPageLocators, ProductPageLocators, RegisterPageLocators
+from page_objacts.catalogpage import CatalogPage
+from page_objacts.productpage import ProductPage
+from page_objacts.registerpage import RegistertPage
 from src.helper import CategoryData
+from page_objacts.mainpage import MainPage
 
 
 def test_check_main_page_elements(browser, base_url):
     browser.get(base_url)
 
-    currency = browser.find_element(*MainPageLocators.CURRENCY)
-    search_btn = browser.find_element(*MainPageLocators.SEARCH_BUTTON)
-    cart_btn = browser.find_element(*MainPageLocators.CART_BUTTON)
-    product_cards = browser.find_elements(*MainPageLocators.PRODUCT_CARD)
-    top_navigation_items = browser.find_elements(*MainPageLocators.TOP_NAVIGATION_ITEMS)
+    currency = MainPage(browser).find_currency()
+    search_btn = MainPage(browser).find_search_btn()
+    cart_btn = MainPage(browser).find_cart_btn()
+    product_cards = MainPage(browser).find_product_cards()
+    top_navigation_items = MainPage(browser).find_top_navigation_items()
 
     assert currency.text == 'Currency'
     assert search_btn.is_enabled()
@@ -20,11 +23,11 @@ def test_check_main_page_elements(browser, base_url):
 
 def test_check_catalog_elements(browser, base_url):
     browser.get(base_url + "catalog/tablet")
-    categories = browser.find_elements(*CatalogPageLocators.CATEGORIES)
+    categories = CatalogPage(browser).find_categories()
 
-    sort = browser.find_element(*CatalogPageLocators.SORT)
-    limit = browser.find_element(*CatalogPageLocators.LIMIT)
-    limits_select = browser.find_elements(*CatalogPageLocators.LIMIT_SELECT)
+    sort = CatalogPage(browser).find_sort()
+    limit = CatalogPage(browser).find_limit()
+    limits_select = CatalogPage(browser).find_limit_select()
 
     assert len(categories) == 8
     for category in categories:
@@ -38,13 +41,12 @@ def test_check_catalog_elements(browser, base_url):
 def test_check_product_card(browser, base_url):
     browser.get(base_url + "product/laptop-notebook/hp-lp3065")
 
-    product_price = browser.find_element(*ProductPageLocators.PRICE)
-    add_wl = browser.find_element(*ProductPageLocators.ADD_WISH_LIST)
-    add_to_cart = browser.find_element(*ProductPageLocators.ADD_TO_CART)
-    quantity = browser.find_element(*ProductPageLocators.QUANTITY)
-    delivery_date = browser.find_element(*ProductPageLocators.DELIVERY_DATE)
-    delivery_date.click()
-    calendar = browser.find_element(*ProductPageLocators.CALENDAR)
+    product_price = ProductPage(browser).find_product_price()
+    add_wl = ProductPage(browser).find_add_wl()
+    add_to_cart = ProductPage(browser).find_add_to_cart()
+    quantity = ProductPage(browser).find_quantity()
+    delivery_date = ProductPage(browser).set_delivery_date()
+    calendar = ProductPage(browser).find_calendar()
 
     assert product_price.is_displayed()
     assert add_wl.is_enabled()
@@ -56,11 +58,11 @@ def test_check_product_card(browser, base_url):
 
 def test_registration_page(browser, base_url):
     browser.get(base_url + "?route=account/register")
-    page_main_title = browser.find_element(*RegisterPageLocators.PAGE_MAIN_TITLE)
-    first_name = browser.find_element(*RegisterPageLocators.FIRST_NAME)
-    required_fields = browser.find_elements(*RegisterPageLocators.REQUIRED_FIELDS)
-    policy = browser.find_element(*RegisterPageLocators.POLICY)
-    menu_sections = browser.find_elements(*RegisterPageLocators.MENU_SECTIONS)
+    page_main_title = RegistertPage(browser).find_title()
+    first_name = RegistertPage(browser).find_first_name()
+    required_fields = RegistertPage(browser).find_req_fields()
+    policy = RegistertPage(browser).find_policy()
+    menu_sections = RegistertPage(browser).find_menu_sections()
 
     assert page_main_title.text == "Register Account"
     assert first_name.get_property("placeholder") == "First Name"
