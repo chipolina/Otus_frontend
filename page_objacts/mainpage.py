@@ -11,16 +11,16 @@ class MainPage(BasePage):
     TOP_NAVIGATION_ITEMS = (By.XPATH, "//li[contains(@class, 'nav-item')]")
 
     def find_currency(self):
-        return self.element(*self.CURRENCY)
+        return self.element(self.CURRENCY)
 
     def find_search_btn(self):
-        return self.element(*self.SEARCH_BUTTON)
+        return self.element(self.SEARCH_BUTTON)
 
     def find_cart_btn(self):
-        return self.element(*self.CART_BUTTON)
+        return self.element(self.CART_BUTTON)
 
     def find_product_cards(self):
-        return self.elements(*self.PRODUCT_CARD)
+        return self.elements(self.PRODUCT_CARD)
 
     def find_top_navigation_items(self):
         return self.elements(self.TOP_NAVIGATION_ITEMS)

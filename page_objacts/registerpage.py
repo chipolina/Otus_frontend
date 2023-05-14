@@ -11,16 +11,16 @@ class RegistertPage(BasePage):
     MENU_SECTIONS = (By.XPATH, "//a[@class='list-group-item']")
 
     def find_title(self):
-        return self.element(*self.PAGE_MAIN_TITLE)
+        return self.element(self.PAGE_MAIN_TITLE)
 
     def find_first_name(self):
-        return self.element(*self.FIRST_NAME)
+        return self.element(self.FIRST_NAME)
 
     def find_req_fields(self):
-        return self.elements(*self.REQUIRED_FIELDS)
+        return self.elements(self.REQUIRED_FIELDS)
 
     def find_policy(self):
-        return self.element(*self.POLICY)
+        return self.element(self.POLICY)
 
     def find_menu_sections(self):
-        return self.elements(*self.MENU_SECTIONS)
+        return self.elements(self.MENU_SECTIONS)

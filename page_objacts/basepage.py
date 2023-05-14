@@ -27,3 +27,12 @@ class BasePage:
 
     def check_element_text(self, locator, text):
         self.element(locator).text(text)
+
+    def check_element_property(self, locator, prop, value):
+        assert self.element(locator).get_property(prop) == value
+
+    def check_display_element(self, locator):
+        self.element(locator).is_displayed()
+
+    def check_is_not_selected(self, locator):
+        assert not self.element(locator).is_selected()

@@ -12,22 +12,22 @@ class ProductPage(BasePage):
     CALENDAR = (By.XPATH, "//*[contains(@class, 'daterangepicker')]")
 
     def find_product_price(self):
-        return self.element(*self.PRICE)
+        return self.element(self.PRICE)
 
     def find_add_wl(self):
-        return self.element(*self.ADD_WISH_LIST)
+        return self.element(self.ADD_WISH_LIST)
 
     def find_add_to_cart(self):
-        return self.element(*self.ADD_TO_CART)
+        return self.element(self.ADD_TO_CART)
 
     def find_quantity(self):
-        return self.element(*self.QUANTITY)
+        return self.element(self.QUANTITY)
 
     def find_delivery_date(self):
-        return self.element(*self.DELIVERY_DATE)
+        return self.element(self.DELIVERY_DATE)
 
     def set_delivery_date(self):
         self.find_delivery_date().click()
 
     def find_calendar(self):
-        return self.element(*self.CALENDAR)
+        return self.element(self.CALENDAR)
