@@ -1,4 +1,5 @@
 import string
+from dataclasses import dataclass
 from enum import Enum
 import random
 
@@ -14,7 +15,7 @@ class CategoryData(Enum):
     MP3_Players = 'MP3 Players'
 
 
-class Currency_symbols(Enum):
+class CurrencyIcons(Enum):
     USD = "$"
     EUR = "€"
     GBP = "£"
@@ -26,3 +27,4 @@ def generate_text(char_num):
 
 def generate_email():
     return generate_text(7) + "@gmail.com"
+

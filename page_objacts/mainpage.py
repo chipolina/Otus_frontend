@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from page_objacts.basepage import BasePage
-from src.helper import Currency_symbols
+from src.helper import CurrencyIcons
 
 
 class MainPage(BasePage):
@@ -36,9 +36,5 @@ class MainPage(BasePage):
         self.element(self.CURRENCY).click()
         self.elements(self.CURRENCY_LIST)
         self.select_currency(currency).click()
-        if currency == "EUR":
-            self.check_element_text(self.CURRENCY_SYMBOL, Currency_symbols.EUR.value)
-        if currency == "USD":
-            self.check_element_text(self.CURRENCY_SYMBOL, Currency_symbols.USD.value)
-        if currency == "GBP":
-            self.check_element_text(self.CURRENCY_SYMBOL, Currency_symbols.GBP.value)
+        currency_icon = CurrencyIcons[currency].value
+        self.check_element_text(self.CURRENCY_SYMBOL, currency_icon)

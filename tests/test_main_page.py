@@ -64,4 +64,4 @@ def test_register_new_user(browser, base_url):
 
 def test_switch_currency(browser, base_url):
     browser.get(base_url)
-    MainPage(browser).change_currency("GBP")
+    MainPage(browser).change_currency("USD")
