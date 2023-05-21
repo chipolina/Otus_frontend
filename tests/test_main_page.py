@@ -1,3 +1,5 @@
+import pytest
+
 from page_objacts.catalogpage import CatalogPage
 from page_objacts.productpage import ProductPage
 from page_objacts.registerpage import RegistertPage
@@ -55,7 +57,11 @@ def test_add_new_product(browser): ...
 def test_remove_product(browser): ...
 
 
-def test_register_new_user(browser): ...
+def test_register_new_user(browser, base_url):
+    browser.get(base_url + "?route=account/register")
+    RegistertPage(browser).create_random_user()
 
 
-def test_switch_currency(browser): ...
+def test_switch_currency(browser, base_url):
+    browser.get(base_url)
+    MainPage(browser).change_currency("GBP")

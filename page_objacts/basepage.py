@@ -1,3 +1,4 @@
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
@@ -7,13 +8,13 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def element(self, locator: tuple):
+    def element(self, locator: tuple) -> WebElement:
         try:
             return WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             raise AssertionError(f"Элемент {locator} не видно на странице")
 
-    def elements(self, locator: tuple):
+    def elements(self, locator: tuple)-> WebElement:
         try:
             return WebDriverWait(self.driver, 5).until(EC.visibility_of_all_elements_located(locator))
         except TimeoutException:
